@@ -1,0 +1,23 @@
+
+version: '3'
+
+services:
+  chat-server:
+      build:
+          context: ./
+      ports:
+        - "9999:9999"
+      depends_on:
+        - db
+      links:
+        - db
+      stdin_open: true
+      tty: true
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/:ro
+    environment:
+        MYSQL_ROOT_PASSWORD: my_secret_pw_shh
+    ports:
+      - "9906:3306"
