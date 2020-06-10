@@ -2,7 +2,6 @@
 import mysql.connector as mysql
 import threading
 import socket
-import mysql.connector as mysql
 
 db = mysql.connect(
     host="db",
@@ -59,19 +58,19 @@ def querry(sql):
     if "AirForce" in n:
         if "Chief" in n:
             sql = sql + \
-                "and (username like '%Air%' or username = 'ArmyGeneral' or username ='NavyMarshall')"
+                "and (username like '%Air%' or username = 'ArmyGeneral' or username ='NavyMarshall' or username ='ChiefCommander')"
             return sql
         sql += "and ( username like '%Air%')"
     elif "Army" in n:
         if "General" in n:
             sql = sql + \
-                "and (username like '%Army%' or username = 'AirForce' or username ='AirForceChief')"
+                "and (username like '%Army%' or username = 'AirForce' or username ='AirForceChief' or username ='ChiefCommander')"
             return sql
         sql += "and( username like '%Army%')"
     elif "Navy" in n:
         if "Marshall" in n:
             sql = sql + \
-                "and ( username like '%Navy%' or username = 'AirForceChief' or username ='ArmyGeneral')"
+                "and ( username like '%Navy%' or username = 'AirForceChief' or username ='ArmyGeneral' or username ='ChiefCommander')"
             return sql
         sql += "and (username like '%Navy%')"
     return sql
