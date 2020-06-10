@@ -1,5 +1,4 @@
 # Sysad-3
-Hackermode contains dockerised chatserver and mysql database
-To get inside the container Command "docker exec -it container_name /bin/bash" is executed.
-To communicate between clients the command "python ./client.py" is to be executed in the container of the server.
-Hackermode Subtask-3 has been partially attempted.  
+Hackermode Subtask-3 has been partially attempted.
+Building the container automatically setups the chat server and database.
+python client.py (or) python ./client.py can be executed in the container(hackermode_chat-server_1) to connect to the server.  
