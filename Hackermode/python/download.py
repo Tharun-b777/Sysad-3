@@ -12,7 +12,7 @@ cursor = db.cursor()
 usr = input("Enter username: ")
 # usr=getpass.getuser()
 
-sql = "SELECT username,chat,sent_date from history WHERE sent_date >= curdate() - INTERVAL 6 DAY AND sent_date < curdate() + INTERVAL 1 DAY and username = '{}'".format(usr)
+sql = "SELECT username,chat,sent_date from history WHERE sent_date >= curdate() - INTERVAL 6 DAY AND sent_date <= curdate()  and username = '{}'".format(usr)
 cursor.execute(sql)
 records = cursor.fetchall()
 if records:

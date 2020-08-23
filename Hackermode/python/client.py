@@ -58,21 +58,21 @@ def querry(sql):
     if "AirForce" in n:
         if "Chief" in n:
             sql = sql + \
-                "and (username like '%Air%' or username = 'ArmyGeneral' or username ='NavyMarshall' or username ='ChiefCommander')"
+                "and (username like 'Air%' or username = 'ArmyGeneral' or username ='NavyMarshall' or username ='ChiefCommander')"
             return sql
-        sql += "and ( username like '%Air%')"
+        sql += "and ( username like 'Air%')"
     elif "Army" in n:
         if "General" in n:
             sql = sql + \
-                "and (username like '%Army%' or username = 'AirForce' or username ='AirForceChief' or username ='ChiefCommander')"
+                "and (username like 'Army%' or username = 'NavyMarshall' or username ='AirForceChief' or username ='ChiefCommander')"
             return sql
-        sql += "and( username like '%Army%')"
+        sql += "and( username like 'Army%')"
     elif "Navy" in n:
         if "Marshall" in n:
             sql = sql + \
-                "and ( username like '%Navy%' or username = 'AirForceChief' or username ='ArmyGeneral' or username ='ChiefCommander')"
+                "and ( username like 'Navy%' or username = 'AirForceChief' or username ='ArmyGeneral' or username ='ChiefCommander')"
             return sql
-        sql += "and (username like '%Navy%')"
+        sql += "and (username like 'Navy%')"
     return sql
 
 
@@ -92,24 +92,33 @@ def Missed_Message():
         cursor.execute(sql)
         d = cursor.fetchall()
         if "Army" in n:
+            sql = "select username,chat from history where username like 'Army%'"
             if d:
                 print("NO MESSAGE MISSED")
             else:
-                cursor.execute("select username,chat from history where username like '%Army%'")
+                if "General" in n:
+                    sql += " or username = 'NavyMarshall' or username ='AirForceChief' or username ='ChiefCommander"
+                cursor.execute(sql)
                 for a, b in cursor.fetchall():
                     print(a+":"+b)
         elif "Navy" in n:
+            sql = "select username,chat from history where username like 'Navy%'"
             if d:
                 print("NO MESSAGE MISSED")
             else:
-                cursor.execute("select username,Chat from history where username like '%Navy%'")
+                if "Marshall" in n:
+                    sql += " or username = 'ArmyGeneral' or username ='AirForceChief' or username ='ChiefCommander"
+                cursor.execute(sql)
                 for a, b in cursor.fetchall():
                     print(a+":"+b)
         elif "Air" in n:
+            sql = "select username,chat from history where username like 'AirForce%'"
             if d:
                 print("NO MESSAGE MISSED")
             else:
-                cursor.execute("select username,chat from history where username like '%Air%'")
+                if "Chief" in n:
+                    sql += " or username = 'ArmyGeneral' or username ='AirForceChief' or username ='ChiefCommander"
+                cursor.execute(sql)
                 for a, b in cursor.fetchall():
                     print(a+":"+b)
         else:

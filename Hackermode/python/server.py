@@ -5,7 +5,7 @@ import threading
 s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind(('0.0.0.0', 9999))
-s.listen(154)
+s.listen()
 Leader_clients = []
 Army_clients = []
 AirForce_clients = []
@@ -69,7 +69,7 @@ def handle(connection):
                         a.send(msg)
 
             if "Exit" in msg.decode('utf-8'):
-                print(":sjhv")
+                # print("EXITED")
                 deleteconn(connection)
                 break
         except:
